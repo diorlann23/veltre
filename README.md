@@ -1,6 +1,6 @@
 # VELTRÉ Store
 
-A full e-commerce web app for a premium joggers brand. Customers register, shop, check out and track orders; the store owner manages everything from an admin dashboard. Orders are saved in MongoDB and sent to the seller on WhatsApp for confirmation. No online payment is taken.
+A full e-commerce web app for a women's dress boutique. Customers register, shop, check out and track orders; the store owner manages everything from an admin dashboard. Orders are saved in MongoDB and sent to the seller on WhatsApp for confirmation. No online payment is taken.
 
 > **VELTRÉ is a working name.** Change it any time in **Admin → Settings → Store**.
 
@@ -58,7 +58,7 @@ Either:
 
 ### Sample catalog (optional)
 
-`npm run seed` adds 4 collections, 20 products (with photos, colours, sizes and stock) and the homepage hero and About images to the database in `MONGODB_URI`. It refuses to run if products already exist. `npm run seed -- --replace` swaps the catalog for the sample one; orders, customers and your settings text are kept. Edit `scripts/seed/catalog.ts` to change the sample data.
+`npm run seed` adds 4 collections, 26 dresses, rompers and playsuits (with front and back photos, colours, sizes and stock) and the homepage hero and About images to the database in `MONGODB_URI`. It refuses to run if products already exist. `npm run seed -- --replace` swaps the catalog for the sample one; orders, customers and your settings text are kept. Edit `scripts/seed/catalog.ts` to change the sample data.
 
 Then open **`/admin`** and:
 1. **Settings:** check the WhatsApp number (`233599967302` is set), delivery and payment text, contact details and socials; upload a hero image.

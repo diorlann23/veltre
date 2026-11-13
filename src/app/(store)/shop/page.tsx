@@ -17,7 +17,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     const c = (await listCategories()).find((x) => x.slug === query.categories[0])
     if (c) return { title: c.name, description: c.description || undefined }
   }
-  return { title: 'Shop', description: 'Shop premium joggers. Filter by size, colour and price.' }
+  return { title: 'Shop', description: 'Shop dresses, rompers and playsuits. Filter by size, colour and price.' }
 }
 
 export default async function ShopPage({ searchParams }: Props) {
