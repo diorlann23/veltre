@@ -1,0 +1,263 @@
+/* Launch splash: only shown when the site runs as an installed app (or with ?splash for previewing). */
+
+.launch-splash {
+  --ls-bg: #050504;
+  --ls-gold: #e2bf6d;
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--ls-bg);
+  color: var(--ls-gold);
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  transition:
+    opacity 0.7s var(--ease-premium) 0.12s,
+    visibility 0s linear 0.82s;
+}
+@media (display-mode: standalone), (display-mode: window-controls-overlay), (display-mode: fullscreen) {
+  .launch-splash {
+    display: flex;
+  }
+}
+.launch-splash[data-force] {
+  display: flex;
+}
+.launch-splash[data-skip] {
+  display: none !important;
+}
+.launch-splash[data-leaving] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Warm light pooling behind the emblem */
+.ls-glow {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: min(115vw, 620px);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(226 191 109 / 0.26), rgb(226 191 109 / 0.1) 42%, transparent 82%);
+  /* Blur rather than a long gradient tail, so the falloff has no visible edge on dark screens */
+  filter: blur(48px);
+  animation:
+    ls-fade 1.2s ease-out both,
+    ls-breathe 3.6s ease-in-out 1.2s infinite;
+}
+
+/* Gold dust drifting upward */
+.ls-dust span {
+  position: absolute;
+  bottom: -8px;
+  border-radius: 999px;
+  background: #f3d68a;
+  box-shadow: 0 0 6px 1px rgb(243 214 138 / 0.6);
+  opacity: 0;
+  animation: ls-rise linear infinite both;
+}
+
+.ls-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px;
+  margin-top: -4vh;
+  transition:
+    transform 0.8s var(--ease-premium),
+    filter 0.8s var(--ease-premium);
+}
+.launch-splash[data-leaving] .ls-stage {
+  transform: scale(1.08);
+  filter: blur(6px);
+}
+
+.ls-emblem {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(190px, 52vw, 250px);
+  aspect-ratio: 1;
+}
+
+.ls-ring {
+  position: absolute;
+  inset: 0;
+  rotate: -90deg;
+  overflow: visible;
+}
+.ls-ring circle {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ls-draw 1.5s var(--ease-premium) 0.35s forwards;
+}
+.ls-ring .ls-ring-inner {
+  opacity: 0.55;
+  stroke-dashoffset: -1;
+  animation-delay: 0.6s;
+}
+
+.ls-mark {
+  position: relative;
+  width: 60%;
+  animation: ls-mark-in 1.15s var(--ease-premium) 0.1s both;
+  filter: blur(0) drop-shadow(0 10px 30px rgb(226 191 109 / 0.25));
+}
+.ls-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+/* A sweep of light across the metal, clipped to the monogram's own shape */
+.ls-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 250 230 / 0.85) 48%, rgb(255 244 205 / 0.35) 54%, transparent 64%);
+  background-size: 260% 100%;
+  background-position: 130% 0;
+  -webkit-mask: url('/icons/splash-mark.png') center / contain no-repeat;
+  mask: url('/icons/splash-mark.png') center / contain no-repeat;
+  mix-blend-mode: screen;
+  animation: ls-shine 1.3s ease-in-out 1.05s both;
+}
+
+.ls-word {
+  display: flex;
+  margin-top: 22px;
+  margin-right: -0.42em;
+  font-family: var(--font-splash), var(--font-display);
+  font-size: clamp(26px, 8vw, 34px);
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  line-height: 1.1;
+}
+/* Room above the caps so accents (É) aren't clipped by background-clip: text */
+.ls-word span {
+  padding-top: 0.3em;
+  background: linear-gradient(100deg, #8a6a2f 0%, #e9c878 30%, #fff2c2 50%, #d6aa52 70%, #7a5a24 100%);
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation:
+    ls-letter 0.9s var(--ease-premium) calc(1.05s + var(--i) * 70ms) both,
+    ls-gleam 2.2s ease-in-out calc(1.6s + var(--i) * 70ms) both;
+}
+
+.ls-rule {
+  display: block;
+  width: 112px;
+  height: 1px;
+  margin-top: 22px;
+  background: linear-gradient(90deg, transparent, var(--ls-gold), transparent);
+  transform-origin: center;
+  animation: ls-rule 0.9s var(--ease-premium) 1.65s both;
+}
+
+.ls-tag {
+  margin-top: 16px;
+  max-width: 320px;
+  text-wrap: balance;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  line-height: 1.7;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(226 191 109 / 0.72);
+  animation: ls-tag 0.9s var(--ease-premium) 1.9s both;
+}
+
+@keyframes ls-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes ls-breathe {
+  50% {
+    opacity: 0.7;
+    scale: 0.94;
+  }
+}
+@keyframes ls-rise {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  15% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift), -70vh);
+  }
+}
+@keyframes ls-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes ls-mark-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.84);
+    filter: blur(14px) drop-shadow(0 10px 30px rgb(226 191 109 / 0));
+  }
+}
+@keyframes ls-shine {
+  from {
+    background-position: 130% 0;
+  }
+  to {
+    background-position: -30% 0;
+  }
+}
+@keyframes ls-letter {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+    filter: blur(6px);
+  }
+}
+@keyframes ls-gleam {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
+}
+@keyframes ls-rule {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+}
+@keyframes ls-tag {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+    letter-spacing: 0.5em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launch-splash *,
+  .launch-splash *::before,
+  .launch-splash *::after {
+    animation-delay: 0s !important;
+  }
+  .ls-dust {
+    display: none;
+  }
+}

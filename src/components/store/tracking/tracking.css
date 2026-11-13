@@ -1,0 +1,99 @@
+/* Order tracking page: motion and the few effects Tailwind utilities don't cover. */
+
+.tk-gradient-text {
+  background: linear-gradient(95deg, var(--color-ember-soft), var(--color-ember) 55%, var(--color-ember-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tk-fill {
+  background: linear-gradient(90deg, var(--color-ember-soft), var(--color-ember));
+}
+
+/* Hero parcel */
+.tk-box {
+  animation: tk-float 5s ease-in-out infinite;
+}
+.tk-pin {
+  animation: tk-bob 2.4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+.tk-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tk-ripple 3.2s ease-out infinite;
+}
+.tk-ring:nth-of-type(2) {
+  animation-delay: 1.05s;
+}
+.tk-ring:nth-of-type(3) {
+  animation-delay: 2.1s;
+}
+.tk-muted .tk-box,
+.tk-muted .tk-ring,
+.tk-muted .tk-pin {
+  animation: none;
+}
+.tk-muted svg {
+  filter: grayscale(1) brightness(0.8);
+}
+
+/* Current step and live indicators */
+.tk-halo {
+  position: relative;
+}
+.tk-halo::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 999px;
+  background: radial-gradient(closest-side, rgb(232 119 46 / 0.35), transparent);
+  animation: tk-pulse 2.2s ease-in-out infinite;
+}
+.tk-dot {
+  position: relative;
+}
+.tk-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: inherit;
+  animation: tk-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes tk-float {
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes tk-bob {
+  50% {
+    transform: translateY(-5px);
+  }
+}
+@keyframes tk-ripple {
+  from {
+    opacity: 0.85;
+    transform: scale(0.55);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.15);
+  }
+}
+@keyframes tk-pulse {
+  50% {
+    opacity: 0.35;
+    transform: scale(1.15);
+  }
+}
+@keyframes tk-ping {
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(2.4);
+  }
+}

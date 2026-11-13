@@ -1,0 +1,240 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: var(--font-inter-tight), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0e0e0e;
+  --color-ink-soft: #2a2a28;
+  --color-paper: #f4f2ee;
+  --color-bone: #e8e5df;
+  --color-sand: #d9d5cd;
+  --color-mute: #5e5b57;
+  --color-mute-soft: #8a8782;
+  --color-line: #d6d2ca;
+  --color-accent: #9c4a2b;
+  --color-accent-soft: #e0a383;
+  --color-success: #2f5d43;
+  --color-whatsapp: #1f7a4d;
+  --color-ember: #e8772e;
+  --color-ember-soft: #f5b261;
+  --color-ember-deep: #b5531b;
+
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-fade-up: fade-up 0.6s var(--ease-premium) both;
+  --animate-fade-in: fade-in 0.4s ease-out both;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    @apply bg-ink text-paper;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-paper);
+  }
+  button:not(:disabled),
+  [role='button'],
+  label[for] {
+    cursor: pointer;
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-10;
+  }
+  .eyebrow {
+    @apply text-[11px] font-semibold tracking-[0.22em] text-mute uppercase;
+  }
+  .wordmark {
+    @apply font-display font-semibold tracking-[0.34em] uppercase;
+    margin-right: -0.34em;
+  }
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s var(--ease-premium);
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+  .field {
+    @apply block w-full rounded-lg border border-line bg-white/70 px-4 py-3 text-base text-ink transition placeholder:text-mute-soft focus:border-ink focus:bg-white focus:outline-none disabled:opacity-60 sm:text-sm;
+  }
+  .field[aria-invalid='true'] {
+    @apply border-accent bg-white;
+  }
+  .card {
+    @apply rounded-2xl border border-line/70 bg-white/60;
+  }
+}
+
+.img-fade {
+  transition: opacity 0.5s ease;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+[data-state='open'].overlay-anim {
+  animation: fade-in 0.25s ease-out;
+}
+[data-state='closed'].overlay-anim {
+  animation: fade-in 0.2s ease-in reverse;
+}
+[data-state='open'].sheet-right {
+  animation: sheet-right-in 0.4s var(--ease-premium);
+}
+[data-state='closed'].sheet-right {
+  animation: sheet-right-out 0.25s ease-in;
+}
+[data-state='open'].sheet-top {
+  animation: sheet-top-in 0.35s var(--ease-premium);
+}
+[data-state='closed'].sheet-top {
+  animation: fade-in 0.2s ease-in reverse;
+}
+[data-state='open'].pop-anim {
+  animation: pop-in 0.2s var(--ease-premium);
+}
+[data-state='closed'].pop-anim {
+  animation: fade-in 0.15s ease-in reverse;
+}
+.toast-anim[data-state='open'] {
+  animation: fade-up 0.35s var(--ease-premium);
+}
+.toast-anim[data-state='closed'] {
+  animation: fade-in 0.2s ease-in reverse;
+}
+.toast-anim[data-swipe='move'] {
+  transform: translateX(var(--radix-toast-swipe-move-x));
+}
+.toast-anim[data-swipe='end'] {
+  animation: fade-in 0.2s ease-in reverse;
+}
+
+[data-state='open'].install-sheet {
+  animation: sheet-bottom-in 0.4s var(--ease-premium);
+}
+[data-state='closed'].install-sheet {
+  animation: sheet-bottom-out 0.25s ease-in;
+}
+@media (min-width: 40rem) {
+  [data-state='open'].install-sheet {
+    animation: pop-in 0.2s var(--ease-premium);
+  }
+  [data-state='closed'].install-sheet {
+    animation: fade-in 0.15s ease-in reverse;
+  }
+}
+
+@keyframes sheet-bottom-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+@keyframes sheet-bottom-out {
+  to {
+    transform: translateY(100%);
+  }
+}
+@keyframes sheet-right-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+@keyframes sheet-right-out {
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes sheet-top-in {
+  from {
+    transform: translateY(-12px);
+    opacity: 0;
+  }
+}
+@keyframes pop-in {
+  from {
+    transform: scale(0.97) translateY(4px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (display-mode: standalone) {
+  body {
+    overscroll-behavior-y: none;
+  }
+}
