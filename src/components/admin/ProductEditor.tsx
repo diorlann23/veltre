@@ -172,7 +172,7 @@ export function ProductEditor({ product, categories }: { product?: Product; cate
               {(a) => <input {...a} value={name} onChange={(e) => setName(e.target.value)} className="field" />}
             </Field>
             <Field id="p-slug" label="URL" optional hint={`Leave empty to create from the name. /product/${slug || 'your-product-name'}`} error={errors.slug}>
-              {(a) => <input {...a} value={slug} onChange={(e) => setSlug(e.target.value.toLowerCase())} className="field" placeholder="core-fleece-jogger" />}
+              {(a) => <input {...a} value={slug} onChange={(e) => setSlug(e.target.value.toLowerCase())} className="field" placeholder="navy-lace-halter-dress" />}
             </Field>
             <Field id="p-description" label="Description" optional error={errors.description}>
               {(a) => <textarea {...a} rows={4} value={description} onChange={(e) => setDescription(e.target.value)} className="field resize-y" />}

@@ -10,8 +10,8 @@ import { deleteUnreferencedImages, imageUrl } from './images'
 
 const DEFAULTS: Omit<SettingsDoc, '_id' | 'updatedAt'> = {
   brandName: 'VELTRÉ',
-  tagline: 'Built for motion. Cut for the city.',
-  description: 'Premium joggers and modern streetwear essentials. Considered fits, quiet details, made to move with you.',
+  tagline: 'Dresses made to be noticed.',
+  description: 'Bodycon, party and day dresses, rompers and playsuits. Hand-picked pieces, confirmed with you on WhatsApp.',
   whatsappNumber: '233599967302',
   contact: { email: '', phone: '+233 59 996 7302', location: '', hours: '' },
   social: { instagram: '', tiktok: '', snapchat: '', x: '', facebook: '' },
@@ -19,12 +19,12 @@ const DEFAULTS: Omit<SettingsDoc, '_id' | 'updatedAt'> = {
   deliveryInfo: 'Delivery fee, timing and options are confirmed with you on WhatsApp after you order.',
   paymentInfo: 'No payment is taken on this website. Payment options are confirmed directly with you on WhatsApp after you place your order.',
   exchangesInfo: 'Questions about sizing or exchanges? Message us on WhatsApp and we will help.',
-  heroHeading: 'Built for motion. Cut for the city.',
-  heroText: 'Premium joggers with considered fits and quiet details. Designed for the everyday, made to move with you.',
+  heroHeading: 'Dresses made to be noticed.',
+  heroText: 'Bodycon, party and day dresses, plus rompers and playsuits. Hand-picked pieces for every occasion.',
   heroImageId: null,
-  aboutHeading: 'Elevated essentials for everyday movement.',
+  aboutHeading: 'Hand-picked dresses for every occasion.',
   aboutBody:
-    'We design premium joggers with a clean, modern point of view — balancing proportion, fabric and finish so each pair feels as considered as it looks.\n\nWe keep ordering personal. You choose your pieces, place your order, and we confirm everything with you directly on WhatsApp.',
+    'We hand-pick every dress, romper and playsuit in our collection — from sleek bodycon and lace to easy day dresses and statement evening pieces.\n\nWe keep ordering personal. You choose your pieces, place your order, and we confirm everything with you directly on WhatsApp.',
   aboutImageId: null,
   orderPrefix: 'VLT',
   lowStockThreshold: 5,

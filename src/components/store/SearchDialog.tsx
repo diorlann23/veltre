@@ -65,7 +65,7 @@ export function SearchDialog({ open, onOpenChange }: { open: boolean; onOpenChan
             autoComplete="off"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search joggers, colours, styles…"
+            placeholder="Search dresses, colours, styles…"
             className="min-w-0 flex-1 bg-transparent py-2 font-display text-xl tracking-tight placeholder:text-mute-soft focus:outline-none sm:text-2xl"
           />
         </form>

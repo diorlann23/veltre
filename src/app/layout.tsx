@@ -17,7 +17,7 @@ export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
   const s = await getSettings()
-  const title = `${s.brandName} — Premium Joggers & Streetwear`
+  const title = `${s.brandName} — Dresses, Rompers & Playsuits`
   return {
     metadataBase: new URL(await siteUrl()),
     title: { default: title, template: `%s | ${s.brandName}` },
